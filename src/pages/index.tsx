@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import {
@@ -7,12 +8,20 @@ import {
   selectCount,
 } from "../features/counter/counterSlice";
 
+import SampleTimer from "@/components/SampleTimer";
+import withTimer from "@/components/hocs/withTimer";
+import SampleInfo from "@/components/SampleInfo";
+import withExtraInfo from "@/components/hocs/withExtraInfo";
+import TestIntv from "@/components/TestIntv";
+
 import type { NextPage } from "next";
 
 const IndexPage: NextPage = () => {
   const dispatch = useAppDispatch();
   const count = useAppSelector(selectCount);
   const [incrementAmount, setIncrementAmount] = useState<number>(0);
+  const SampleWithTimer = withTimer(SampleTimer);
+  const SampleWithInfo = withExtraInfo(SampleInfo);
 
   return (
     <>
@@ -37,6 +46,10 @@ const IndexPage: NextPage = () => {
         <button onClick={() => dispatch(decrement())}>Decrement by 1</button>
         <button onClick={() => dispatch(increment())}>Increment by 1</button>
       </div>
+      <Link href="/kanye">kanye</Link>
+      <SampleWithTimer />
+      <SampleWithInfo />
+      {/* <TestIntv/> */}
     </>
   );
 };
