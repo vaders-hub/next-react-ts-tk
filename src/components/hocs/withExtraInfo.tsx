@@ -1,21 +1,24 @@
 import React, { ComponentType, useState, useEffect } from "react";
 
 type ExtraInfoType = {
-  extraInfo: string;
-  elses: number;
+  extraData: string;
 };
 
-export default function withExtraInfo<P>(
-  WrappedComponent: ComponentType<P & ExtraInfoType>
-) {
+export default function withExtraInfo<P>(WrappedComponent: ComponentType<P>) {
   const [extraInfo, setExtraInfo] = useState("");
 
   useEffect(() => {
     setExtraInfo("important data.");
   }, []);
 
-  const ComponentWithExtraInfo = (props: P) => {
-    return <WrappedComponent {...props} extraInfo={extraInfo} elses={1} />;
+  const ComponentWithExtraInfo = ({ extraData, ...props }: ExtraInfoType) => {
+    return (
+      <WrappedComponent
+        {...(props as P)}
+        extraData={extraData}
+        extraInfo={extraInfo}
+      />
+    );
   };
   return ComponentWithExtraInfo;
 }

@@ -2,13 +2,14 @@ import { useEffect } from "react";
 
 type ExtraInfoType = {
   extraInfo: string;
-  elses: number;
+  extraData: string;
 };
 
-const SampleInfo = ({ extraInfo, elses }: ExtraInfoType) => {
+const SampleInfo = (props: ExtraInfoType) => {
+  const { extraInfo, extraData } = props;
   return (
     <p>
-      {extraInfo} {elses}
+      {extraInfo} with {extraData}
     </p>
   );
 };

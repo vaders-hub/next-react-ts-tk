@@ -1,7 +1,9 @@
+/// <reference path="../../interface/HocInf.d.ts" />
+
 import { ComponentType, useCallback, useState } from "react";
 
 export default function withTimer<T>(Component: ComponentType<T>) {
-  return (hocProps: Omit<T, "count" | "startTimer" | "endTimer">) => {
+  const TimerComp = (hocProps: Omit<T, keyof HocInf.SampleInf>) => {
     const [count, setCount] = useState(0);
     const [timer, setTimer] = useState<NodeJS.Timer | number>(-1);
 
@@ -9,7 +11,6 @@ export default function withTimer<T>(Component: ComponentType<T>) {
       const timer = setInterval(
         () =>
           setCount((previous) => {
-            console.log("previous");
             return previous + 1;
           }),
         1000
@@ -31,4 +32,6 @@ export default function withTimer<T>(Component: ComponentType<T>) {
       />
     );
   };
+
+  return TimerComp;
 }

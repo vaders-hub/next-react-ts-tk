@@ -12,6 +12,8 @@ import SampleTimer from "@/components/SampleTimer";
 import withTimer from "@/components/hocs/withTimer";
 import SampleInfo from "@/components/SampleInfo";
 import withExtraInfo from "@/components/hocs/withExtraInfo";
+import SampleCounter from "@/components/SampleCounter";
+import withCounter from "@/components/hocs/withCounter";
 import TestIntv from "@/components/TestIntv";
 
 import type { NextPage } from "next";
@@ -22,6 +24,7 @@ const IndexPage: NextPage = () => {
   const [incrementAmount, setIncrementAmount] = useState<number>(0);
   const SampleWithTimer = withTimer(SampleTimer);
   const SampleWithInfo = withExtraInfo(SampleInfo);
+  const SampleWithCounter = withCounter(SampleCounter);
 
   return (
     <>
@@ -48,7 +51,8 @@ const IndexPage: NextPage = () => {
       </div>
       <Link href="/kanye">kanye</Link>
       <SampleWithTimer />
-      <SampleWithInfo />
+      <SampleWithInfo extraData={"extraData"} />
+      <SampleWithCounter defaultValue={0} />
       {/* <TestIntv/> */}
     </>
   );
